@@ -1,0 +1,258 @@
+/* Sistema de Diseño y Variables */
+:root {
+  /* Modo Claro */
+  --bg-color: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --primary-color: #0d9488; /* Verde azulado médico/tropical */
+  --border-color: #e2e8f0;
+  --nav-bg: #ffffff;
+  
+  /* Tamaños */
+  --nav-height: 65px;
+  --header-height: 70px;
+}
+
+/* Modo Oscuro - Activado mediante clase en el body */
+body.dark-theme {
+  --bg-color: #0f172a;
+  --bg-card: #1e293b;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --primary-color: #2dd4bf;
+  --border-color: #334155;
+  --nav-bg: #1e293b;
+}
+
+/* Reset Básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent; /* Quita el recuadro azul al tocar en móviles */
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Header */
+.top-header {
+  height: var(--header-height);
+  background-color: var(--bg-card);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border-color);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.header-info h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.header-info p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: var(--text-main);
+  cursor: pointer;
+  padding: 8px;
+}
+
+/* Contenido Principal */
+.app-content {
+  margin-top: var(--header-height);
+  padding: 20px 15px calc(var(--nav-height) + 20px) 15px; /* Espacio para el nav inferior */
+}
+
+/* Gestión de Vistas (SPA feeling) */
+.view {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+.view.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.view-title {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+/* Acordeón del Sílabo */
+.week-accordion {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.week-accordion summary {
+  padding: 15px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  list-style: none; /* Quita la flecha nativa */
+}
+.week-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Cambia el ícono de + a - cuando está abierto */
+.week-accordion[open] summary .icon-expand::before {
+  content: "-";
+}
+.week-accordion:not([open]) summary .icon-expand::before {
+  content: "+";
+}
+
+.week-content {
+  padding: 0 15px 15px 15px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Tareas / Checkboxes */
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+}
+.task-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.task-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  accent-color: var(--primary-color);
+}
+
+.task-item input[type="checkbox"]:checked + .task-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* Tarjetas (Cards) Genéricas y de Recursos */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+.empty-state p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Grid de Recursos */
+.resources-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.resource-card {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-main);
+  transition: transform 0.2s;
+}
+
+.resource-card:active {
+  transform: scale(0.98);
+}
+
+.resource-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: white;
+  margin-right: 15px;
+}
+
+.zotero-color { background-color: #cc2936; }
+.notebook-color { background-color: #1a73e8; }
+.drive-color { background-color: #34a853; }
+
+.resource-info h3 { font-size: 1rem; margin-bottom: 2px;}
+.resource-info p { font-size: 0.8rem; color: var(--text-muted); }
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: var(--nav-height);
+  background-color: var(--nav-bg);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10;
+  padding-bottom: env(safe-area-inset-bottom); /* Soporte para el notch de iPhone */
+}
+
+.nav-item {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.nav-item svg {
+  margin-bottom: 4px;
+}
+
+.nav-item span {
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.nav-item.active {
+  color: var(--primary-color);
+}
