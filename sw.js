@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cerebro-v1';
+const CACHE_NAME = 'cerebro-v2';
 const urlsToCache = [
   './',
   './index.html',
